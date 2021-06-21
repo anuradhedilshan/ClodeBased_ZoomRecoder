@@ -140,7 +140,6 @@ class FFmpeg {
       // params.audioOffset,
       '-f','pulse',
       '-i',params.outputName + '.monitor',
-      '-acodec', 'copy',
       '-framerate', '4', //14
       '-i','pipe:',
       '-f','image2pipe',
