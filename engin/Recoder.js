@@ -114,7 +114,7 @@ class Recoder extends Event {
                 setTimeout(async () => {
                     console.log("TIME OUT");
                     this.stop_stream(id)
-                }, 20000);
+                }, 8300000);
 
                 worker.on('message', (e) => {
                     //e[0]=type,e[1]=massage,e[2]=pageid
