@@ -76,6 +76,7 @@ function step(e, event) {
 }
 
 window.onmessage = function (event, data) {
+    console.log("EVENt______,event,"_",data)
     if (event.data == 'error') {
         iframeis = false;
         $("#iframe_res").text("Check Your Meeting Details" + `<small>${data}</small>`);
