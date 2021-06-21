@@ -19,12 +19,12 @@ app.use(cookieParser());
 
 
 
-// const R = new Recoder(onfileUpload);
-// var state = false;
-// (async () => {
-//    await R.setup();
-//    state = true;
-// })()
+ const R = new Recoder(onfileUpload);
+ var state = false;
+ (async () => {
+    await R.setup();
+    state = true;
+ })()
 
 
 
