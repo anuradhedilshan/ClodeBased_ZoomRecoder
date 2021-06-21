@@ -53,9 +53,9 @@
 	      
 	        var target = this.hash,
 	        menu = target;
-	       	var target = $(this.hash);
+	       	var targetb = $(this.hash);
 	        $('html, body').stop().animate({
-	            scrollTop: (target.offset().top) - 130
+	            scrollTop: (targetb.offset().top) - 130
 	        }, 500, 'swing', function () {
 	            window.location.hash = target;
 	            $(document).on("scroll", onScroll);
