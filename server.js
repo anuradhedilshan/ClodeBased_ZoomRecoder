@@ -10,7 +10,7 @@ var cookieParser = require('cookie-parser');
 
 
 var clientsOBJ = {}
-
+var completed = {}
 var app = express();
 const server = http.createServer(app);
 const io = require('socket.io')(server);
@@ -19,12 +19,12 @@ app.use(cookieParser());
 
 
 
- const R = new Recoder(onfileUpload);
- var state = false;
- (async () => {
-    await R.setup();
-    state = true;
- })()
+const R = new Recoder(onfileUpload);
+var state = false;
+   (async () => {
+      await R.setup();
+      state = true;
+   })()
 
 
 
@@ -41,20 +41,33 @@ var jobs = 0;
 
 logger.set_brodcast(on_massage);
 
+ io.sockets.on('ack',()=>{
+   console.log("acknowladge Work in Outside");
+ })
+
 
 io.on('connection', function (socket) {
    console.log('***************',socket.id)
    
    if (socket.handshake.headers.cookie && cookie.parse(socket.handshake.headers.cookie)['id'] ) {
       console.log(socket.handshake.headers.cookie);
-      clientsOBJ[cookie.parse(socket.handshake.headers.cookie)['id']] = socket.id;
+      var id = cookie.parse(socket.handshake.headers.cookie)['id'];
+      clientsOBJ[id] = socket.id;
+      if(completed[id]){
+            io.sockets.to(socket.id).emit('uploadEvent',completed[id]);
+      }
    }
    
+   socket.on("ack", (id) => {
+    logger.log("Got acknowladge from : "+id,id);
+    delete completed[id];
+   });
 
    clients++;
    isjobsChanged();
    io.sockets.emit('client_changed', clients);
    logger.log("Client Connected =>" + clients + " <= useres  live In there");
+
    socket.on('disconnect', function () {
       clients--;
       logger.log("Client Disonnected =>" + clients + " <= useres  live In there");
@@ -141,13 +154,15 @@ server.listen(8080, () => {
 
 
 function onfileUpload(type, file, id) {
+   completed[id] = [type,file,id];
    console.log(`++++++++ File Upload +++++++ type ; ${type} file : ${file} id : ${id}`);
    logger.log(`++++++++ File Upload +++++++ type ; ${type} file : ${file} id : ${id}`,id);
    try {
-   
          io.sockets.to(clientsOBJ[id]).emit('uploadEvent', [type,file,id]);
-      
    } catch (error) {
+          setTimeout(()=>{
+            delete clientsOBJ[id];
+         },2000)
       console.error("CAoont send Brodcast masaage io ", error);
    }
 }
