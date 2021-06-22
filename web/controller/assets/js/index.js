@@ -332,6 +332,7 @@ socket.on('job', function (data) {
 })
 
 socket.on('uploadEvent', function (data) {
+    socket.emit('ack',data[2]);
     if (data[0] == "wait") {
         $('#recoder_data_title').text("Uploading File Please Wait a Moment ......");
         $('#recoder_data_title').append(`</br><small>Your ID is <b> ${data[2]} </b> Remember IT</small>`);
