@@ -40,6 +40,12 @@
     <header class="header-area header-sticky">
         <div class="container">
             <div class="row">
+                <div class="alert alert-success alert-dismissible fade" id="suc" data-dismiss="alert" role="alert">
+                    <strong>Hello There...</strong> Registation successful.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
@@ -50,7 +56,7 @@
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li><a href="#welcome" class="active">Home</a></li>
-                            <li><a href="#features">Setup Meeting</a></li>
+                            <li><a href="#setup">Setup</a></li>
                             <li><a href="#work-process">Work Process</a></li>
                             <li><a href="#testimonials">Testimonials</a></li>
                             <li><a href="#blog">Blog Entries</a></li>
@@ -64,7 +70,9 @@
                     </nav>
                 </div>
             </div>
+
         </div>
+
     </header>
     <!-- ***** Header Area End ***** -->
 
@@ -80,14 +88,14 @@
                                 clases</strong></h1>
                         <p>වැඩේ තේරෙන්නැත්ත්ම් මේකට <font color="lightgreen" size="+1">+94779843032</font> කතා කරල
                             අහගන්න</p>
+                        <a style="background-color:#eeff58;" onclick="show_log()" class="main-button-slider"><i
+                                class="fas fa-sticky-note"> </i> Show LOG</a>
+                        <a style="background-color:#11cbe4;" data-target="#loginModal" data-toggle="modal"
+                            class="main-button-slider"><i class="fas fa-user-friends"></i>Login/Register</a>
 
-                        <a href="#features" style="background-color: #ff589e;" class="main-button-slider"><i
-                                class="fas fa-video"></i> START RECODING</a>
-                        <a data-toggle="modal" style="background-color:#eeff58;" onclick="show_log()"
-                            class="main-button-slider">Show LOG</a>
-                        <a data-toggle="modal" style="background-color:#11cbe4;" onclick="show_log()"
-                            class="main-button-slider">Stop Recoding</a>
-
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#con">
+                            Terms & conditions
+                        </button>
                     </div>
                 </div>
             </div>
@@ -102,7 +110,7 @@
         <div class="container">
             <div class="row">
                 <br>
-                <h5 class="p-5  mt-5 mx-auto">We can work with these too</h5>
+                <h5 class="p-5  mt-5 mx-auto" id="setup">Top Actions</h5>
                 <div class="col-lg-12">
 
                     <div class="row">
@@ -110,13 +118,13 @@
                         <!-- ***** Features Small Item Start ***** -->
                         <div class="col-lg-4 col-md-6 col-sm-6 col-12"
                             data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s">
-                            <a href="https://www.youtube.com/channel/UC4R8DWoMoI7CAwX8_LjQHig">
+                            <a onclick="show_start()">
                                 <div class="features-small-item">
                                     <div class="icon">
-                                        <i><img src="assets/images/featured-item-01.png" width="70px" alt=""></i>
+                                        <i><img src="assets/images/start.png" width="70px" alt=""></i>
                                     </div>
-                                    <h5 class="features-title">Youtube Streaming</h5>
-                                    <p>Customize anything in this template to fit your website needs</p>
+                                    <h5 class="features-title"> Start New Recoding</h5>
+
                                 </div>
                             </a>
                         </div>
@@ -125,13 +133,13 @@
                         <!-- ***** Features Small Item Start ***** -->
                         <div class="col-lg-4 col-md-6 col-sm-6 col-12"
                             data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
-                            <a href="https://vimeo.com/">
+                            <a onclick="show_recodes()">
                                 <div class="features-small-item">
                                     <div class="icon">
-                                        <i><img src="assets/images/featured-item-02.png" width="60px" alt=""></i>
+                                        <i><img src="assets/images/recodes.png" width="60px" alt=""></i>
                                     </div>
-                                    <h5 class="features-title">Viemo</h5>
-                                    <p>Contact us immediately if you have a question in mind</p>
+                                    <h5 class="features-title">View Recodes</h5>
+
                                 </div>
                             </a>
                         </div>
@@ -140,13 +148,13 @@
                         <!-- ***** Features Small Item Start ***** -->
                         <div class="col-lg-4 col-md-6 col-sm-6 col-12"
                             data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s">
-                            <a href="https://www.g2.com/products/vimeo/competitors/alternatives">
+                            <a onclick="show_log()">
                                 <div class="features-small-item">
                                     <div class="icon">
-                                        <i><img src="assets/images/featured-item-03.png" width="80px" alt=""></i>
+                                        <i><img src="assets/images/stop.png" width="80px" alt=""></i>
                                     </div>
-                                    <h5 class="features-title">Others</h5>
-                                    <p>You just need to tell your friends about our free templates</p>
+                                    <h5 class="features-title">Stop Recodes</h5>
+                                    <p></p>
                                 </div>
                             </a>
                         </div>
@@ -159,97 +167,7 @@
     <!-- ***** Features Small End ***** -->
 
     <!-- ***** Features Big Item Start ***** -->
-    <section class="section padding-top-70 padding-bottom-0" id="features">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-md-12 col-sm-12 align-self-center"
-                    data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
-                    <img src="assets/images/left-image.png" class="rounded img-fluid d-block mx-auto" alt="App">
-                </div>
-                <div class="col-lg-1"></div>
-                <!-- Recoding Form -->
-                <div class="col-lg-6 col-md-12 col-sm-12 align-self-center mobile-top-fix">
-                    <!------------------------------------------------------------------------------  -->
 
-                    <section class="steppper">
-                        <!-- *** Step 1 *** -->
-                        <h2>Setup Your Meeting</h2>
-                        <p>Please fill in this form to create an account!</p>
-                        <hr>
-                        <div class="step clearfix">
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-7"><input type="text" class="form-control name" name="fname"
-                                            placeholder="First Name" required="required"></div>
-                                    <div class="col-5"><input type="text " class="form-control name" name="lname"
-                                            placeholder="Last Name" required="required"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" id="email"
-                                    placeholder="Email for ZOOM not required" required="required">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="meetingid" placeholder="Meeting ID"
-                                    required="required">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="passcode" placeholder="Meeting Passcode"
-                                    required="required">
-                            </div>
-                            <div class="form-group">
-                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#con">
-                                    Terms & conditions
-                                </button>
-                                <button type="submit" onclick="step(1)"
-                                    class="btn btn-primary btn-lg float-right step-btn ">Setup Meeting</button>
-                            </div>
-
-                        </div>
-
-
-
-                        <!--*** Step 2 ***  -->
-
-                        <div class="step ">
-
-                            <div class="form-group">
-                                <p>Get Your license code From <font color="#cc00cc">
-                                        <address><b>+94779843032</b></address>
-                                    </font>
-                                </p>
-                                <div class="form-group " id="verify">
-                                    <label for="validationCustom01" class="form-label">Enter Your license code</label>
-                                    <input type="password" class="form-control" id="pin" required>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-secondary" onclick="step(0)"><i
-                                            class="fas fa-long-arrow-alt-left mr-2 "></i>Back</button>
-                                    <button type="submit" onclick="step(2)"
-                                        class="btn btn-primary step-btn btn-lg float-right">Start Recoding</button>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-                        <div class="collapse overflow-auto p-2" id="collapse">
-                            <div class="row">
-                                <h5 id="iframe_res " class="pl-2">Wait For It</h5><img id="iframe_img" alt="">
-                            </div>
-
-                            <iframe id="cframe" width="300" height="300" title="Iframe Example"></iframe>
-                        </div>
-                </div>
-
-
-    </section>
 
     <!-- -------------------------------------------------------------- -->
 
@@ -258,98 +176,7 @@
 
 
 
-    <!-- Button trigger modal -->
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="recoder_data" tabindex="-1" role="dialog" aria-labelledby="Recoder Data"
-        data-backdrop="static" data-keyboard="false" aria-hidden="true">
-        <div class="modal-dialog modal-dialog modal-lg modal-dialog-scrollable" id="scroll_id" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title m-auto" id="recoder_data_title">
-                        Cloud Termial Log
-                    </h5>
-                    <img src="/assets/images/data.gif" id="state" style="padding: 5px;" width="90px" />
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" style="background-color: black;" id="model_body">
-
-                </div>
-                <div class="modal-footer">
-                    <div class="row float-left">
-
-                        <div class="input-group  col-12">
-                            <small class="p-2">Stop Recoding</small>
-                            <input type="text" id="stop" class="form-control" placeholder="Enter the ID to stop"
-                                aria-label="ID" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-danger" type="button" onclick="stop()"><span
-                                    class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"
-                                    id="stopload"></span>
-                                <font id="stopbtn">Stop</font>
-                            </button>
-                        </div>
-
-                    </div>
-
-
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ************************** END Off Canvas ******************************************* -->
-    <!-- Term And condition -->
-    <!-- Button trigger modal -->
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="con" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="s"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="termlabel">Term And condition</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <ul class="list-group list-group-flush" style="font-size: larger;">
-                        <li class="list-group-item fw-bold">ඔබට එක් Meeting කිරීමට Recode කළ හැකි කාලය පැය 2 මිනිත්තු 30
-                            සීමා වේ. </li>
-                        <li class="list-group-item fw-bold"> ඔබගේ Meeting තුළ කිසිදු චලනයක් දක්නට නොලැබුණහොත් මෙය
-                            ස්වංක්‍රීයව ධාවනයෙන් ඉවත්වේ</li>
-                        <li class="list-group-item fw-bold"> යම් හේතුවකින් ඔබගේ Meeting හි Recode Link එක ඔබ වෙත
-                            නොලැබුණහොත් එය නැවත ලබා ගැනීමට Developer සම්බන්ධ
-                            කරගන්න</li>
-                        <li class="list-group-item fw-bold">ඔබගේ Recoded File හී වලංගු කාලය පැය 24කි. ඊට පෙර එය බාගත කර
-                            හෝ මාර්ගගතව නැරඹිය හැක එම කාලය
-                            අවසන් වූ පසු ්වයංක්‍රීයව එය ඉවත්වනු ඇත.</li>
-                        <li class="list-group-item fw-bold"> මෙහි Recode FPS අගය විවිධ හේතූන් මත වෙනස්් විය හැකි බැවින්
-                            සුදුසු Media Player භාවිතයෙන් එය
-                            නිවැරැදි කරගත හැක.</li>
-                        <li class="list-group-item fw-bold">ඔබ යම් Meeting recode කිරීමට යොමු කළ පසු ඔබට ඔබගේ WebBrowser
-                            ඉවත් විය හැක නැවත එම WebBrowser භාවිතයෙන් මෙම වෙබ් අඩවිය වෙත යොමුවී ඔබට Recode අපගෙන් ලබාගත
-                            හැක</li>
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Understood</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- End Term And condition -->
-
-
-
-
+    <!-- ************************** end Off canvas ******************************************* -->
     <div class="row">
         <div class="col-lg-12"></div>
     </div>
@@ -596,11 +423,317 @@
             <div class="row" f>
 
                 <div class="powr-comments-box m-auto " id="05edc31e_1620388721" style="width: 95%;"></div>
-                <script src="https://www.powr.io/powr.js?platform=html"></script>
+                  <script src="https://www.powr.io/powr.js?platform=html"></script>
 
             </div>
     </section>
     <!-- ***** Contact Us End ***** -->
+    <!-- show Recodes Modal -->
+    <!-- Large modal -->
+
+    <div class="modal fade bd-example-modal-lg" id="recodes" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content clearfix ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Your Recodes </h5>
+                    <button class="btn ml-4 btn-primary" onclick="refresh()"><i class="fas fa-sync-alt"></i></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="overflow-auto">
+                    <table class="table col-12 ">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Date Time</th>
+                                <th scope="col">username</th>
+                                <th scope="col">meetingid</th>
+                                <th scope="col">state</th>
+                                <th scope="col">timeout</th>
+                                <th scope="col">Action</th>
+                                <th scope="col">Link</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recodes_body">
+
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-center p-2">
+                        <div class="spinner-grow " id="recodes_spinner" style="width: 5rem; height: 5rem;"
+                            role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Show Recodes Modal  -->
+
+    <!-- login sign in modl -->
+    <div class="modal fade login" id="loginModal">
+        <div class="modal-dialog login animated modal-dialog-centered">
+            <div class=" modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Login/Register</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="box">
+                        <div class="content">
+                            <div class="error"></div>
+                            <div class="form loginBox">
+                                <form method="" name="login" action="" accept-charset="UTF-8">
+                                    <input id="email" class="form-control" type="text" required="" placeholder="Email"
+                                        name="email">
+                                    <input id="password" class="form-control" required="" type="password"
+                                        placeholder="Password" name="password">
+                                    <input class="btn btn-default btn-login" type="button" value="Login"
+                                        onclick="loginAjax(login)">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="content registerBox" style="display:none;">
+                            <div class="form">
+                                <form name="register" html="{:multipart=>true}" data-remote="true" action="/register"
+                                    method="POST" onsubmit="return onRegister(this)" accept-charset="UTF-8">
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="text" name="fname" class="form-control"
+                                                placeholder="First name">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" name="lname"
+                                                placeholder="Last name">
+                                        </div>
+                                    </div>
+                                    <input name="email" class="form-control mb-2" type="email" placeholder="Email">
+                                    <input type="text" class="form-control" name="pn" placeholder="Telephone Number">
+                                    <input class="form-control" type="password" placeholder="Password" name="password">
+                                    <div>
+                                        <input id="password_confirmation" class="form-control" type="password"
+                                            placeholder="Repeat Password" id="password_confirmation">
+                                        <div class="invalid-feedback">
+                                            Password Not Match..
+                                        </div>
+                                    </div>
+                                    <input class="btn btn-default btn-register" type="submit" value="Create account"
+                                        name="commit">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="forgot login-footer">
+                        <span>Looking to
+                            <a href="javascript: showRegisterForm();">create an account</a>
+                            ?</span>
+                    </div>
+                    <div class="forgot register-footer" style="display:none">
+                        <span>Already have an account?</span>
+                        <a href="javascript: showLoginForm();">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- login sign in end -->
+
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="recoder_data" tabindex="-1" role="dialog" aria-labelledby="Recoder Data"
+        data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-lg modal-dialog-scrollable" id="scroll_id" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title m-auto" id="recoder_data_title">
+                        Cloud Termial Log
+                    </h5>
+                    <img src="/assets/images/data.gif" id="state" style="padding: 5px;" width="90px" />
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="background-color: black;" id="model_body">
+
+                </div>
+                <div class="modal-footer">
+                    <div class="row float-left">
+
+                        <div class="input-group  col-12">
+                            <small class="p-2">Stop Recoding</small>
+                            <input type="text" id="stop" class="form-control" placeholder="Enter the ID to stop"
+                                aria-label="ID" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-danger" type="button" onclick="stop()"><span
+                                    class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"
+                                    id="stopload"></span>
+                                <font id="stopbtn">Stop</font>
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Term And condition -->
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="con" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="s"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termlabel">Term And condition</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush" style="font-size: larger;">
+                        <li class="list-group-item fw-bold">ඔබට එක් Meeting කිරීමට Recode කළ හැකි කාලය පැය 2 මිනිත්තු 30
+                            සීමා වේ. </li>
+                        <li class="list-group-item fw-bold"> ඔබගේ Meeting තුළ කිසිදු චලනයක් දක්නට නොලැබුණහොත් මෙය
+                            ස්වංක්‍රීයව ධාවනයෙන් ඉවත්වේ</li>
+                        <li class="list-group-item fw-bold"> යම් හේතුවකින් ඔබගේ Meeting හි Recode Link එක ඔබ වෙත
+                            නොලැබුණහොත් එය නැවත ලබා ගැනීමට Developer සම්බන්ධ
+                            කරගන්න</li>
+                        <li class="list-group-item fw-bold">ඔබගේ Recoded File හී වලංගු කාලය පැය 24කි. ඊට පෙර එය බාගත කර
+                            හෝ මාර්ගගතව නැරඹිය හැක එම කාලය
+                            අවසන් වූ පසු ්වයංක්‍රීයව එය ඉවත්වනු ඇත.</li>
+                        <li class="list-group-item fw-bold"> මෙහි Recode FPS අගය විවිධ හේතූන් මත වෙනස්් විය හැකි බැවින්
+                            සුදුසු Media Player භාවිතයෙන් එය
+                            නිවැරැදි කරගත හැක.</li>
+                        <li class="list-group-item fw-bold">ඔබ යම් Meeting recode කිරීමට යොමු කළ පසු ඔබට ඔබගේ WebBrowser
+                            ඉවත් විය හැක නැවත එම WebBrowser භාවිතයෙන් මෙම වෙබ් අඩවිය වෙත යොමුවී ඔබට Recode අපගෙන් ලබාගත
+                            හැක</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Term And condition -->
+
+    <!-- start Recode modal -->
+
+    <div class="modal fade" id="startJOB" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="s"
+        aria-hidden="true">
+        <div class="modal-dialog login animated modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="row">
+
+                        <!-- Recoding Form -->
+                        <!------------------------------------------------------------------------------  -->
+                        <section class="steppper">
+
+                            <!-- *** Step 1 *** -->
+                            <h2>Setup Your Meeting</h2>
+                            <p>Please fill in this form to Recode Your Meeting</p>
+                            <hr>
+                            <div class="step clearfix">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-7"><input type="text" class="form-control name" name="fname"
+                                                placeholder="First Name" required="required"></div>
+                                        <div class="col-5"><input type="text " class="form-control name" name="lname"
+                                                placeholder="Last Name" required="required"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="email"
+                                        placeholder="Email for ZOOM not required" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="meetingid" placeholder="Meeting ID"
+                                        required="required">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="passcode" placeholder="Meeting Passcode"
+                                        required="required">
+                                </div>
+                                <div class="form-group">
+
+                                    <button type="submit" onclick="step(1)"
+                                        class="btn btn-primary btn-lg float-right step-btn ">Setup
+                                        Meeting</button>
+                                </div>
+
+                            </div>
+                            <!--*** Step 2 ***  -->
+                            <div class="step ">
+
+                                <div class="form-group">
+                                    <p>Get Your license code From <font color="#cc00cc">
+                                            <address><b>+94779843032</b></address>
+                                        </font>
+                                    </p>
+                                    <div class="form-group " id="verify">
+                                        <label for="validationCustom01" class="form-label">Enter Your license
+                                            code</label>
+                                        <input type="password" class="form-control" id="pin" required>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-secondary" onclick="step(0)"><i
+                                                class="fas fa-long-arrow-alt-left mr-2 "></i>Back</button>
+                                        <button type="submit" onclick="step(2)"
+                                            class="btn btn-primary step-btn btn-lg float-right">Start
+                                            Recoding</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="collapse overflow-auto p-2" id="collapse">
+                                <div class="row">
+                                    <h5 id="iframe_res " class="pl-2">Wait For It</h5><img id="iframe_img" alt="">
+                                </div>
+
+                                <iframe id="cframe" width="300" height="300" title="Iframe Example"></iframe>
+                            </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- startRecodeend -->
+
+
+
+
+
 
     <!-- ***** Footer Start ***** -->
 
@@ -611,9 +744,11 @@
                     <ul class="social">
                         <li><a href="https://www.facebook.com/anuradha.dilshan.7"><i class="fab fa-facebook"></i></a>
                         </li>
-                        <li><a href="https://twitter.com/anuradhedilshan"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://twitter.com/anuradhedilshan"><i class="fab fa-twitter"></i></a>
+                        </li>
                         <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                        <li><a href="https://github.com/anuradhedilshan"><i class="fab fa-github"></i></a></li>
+                        <li><a href="https://github.com/anuradhedilshan"><i class="fab fa-github"></i></a>
+                        </li>
                         <li><a href="https://www.youtube.com/channel/UCqz4l23qKTXFDLv7Y5RWAhg"><i
                                     class="fab fa-youtube"></i></a></li>
                     </ul>

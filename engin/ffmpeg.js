@@ -1,6 +1,6 @@
 const spawn = require('child_process').spawn;
 const logger = require('./logger');
-const execAsync = require('async-child-process').execAsync;
+const { exec} = require('child-process-async');
 const fs = require('fs')
 
 
@@ -43,7 +43,7 @@ class FFmpeg {
     try {
       this.ffmpeg.stdout.pause();
       this.ffmpeg.stdin.pause();
-      await execAsync('kill -9 ' + this.ffmpeg.pid);
+      await exec('kill -9 ' + this.ffmpeg.pid);
     } catch (error) {
       this.callback("error", '[ERROR] Failed to close this.ffmpeg..' + error, this.PageID);
       process.exit(1);
@@ -152,7 +152,7 @@ class FFmpeg {
       // Output
       '-maxrate', '2M',
       '-bufsize', '6M',
-      '-async', '1', '-vsync', '1',
+      '-async', '1', 
       params.format,
       params.rtmpUrl,
     ]

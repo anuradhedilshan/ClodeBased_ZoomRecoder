@@ -12,7 +12,7 @@ class chrome extends Event_ {
 
 
 
-    async launchChrome(options = { headless:true,defaultViewport: null, args: ["--window-size=1280,720",'--start-maximized', '--single-process', '--autoplay-policy=no-user-gesture-required'], ignoreDefaultArgs: ["--mute-audio"] }) {
+    async launchChrome(options = { headless:false,defaultViewport: null, args: ["--window-size=1280,720",'--start-maximized', '--single-process', '--autoplay-policy=no-user-gesture-required'], ignoreDefaultArgs: ["--mute-audio"] }) {
         // ,
         // options = { executablePath: '/usr/bin/google-chrome', headless: false }
         try {

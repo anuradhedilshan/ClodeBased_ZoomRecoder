@@ -1,4 +1,4 @@
-const execAsync = require('async-child-process').execAsync;
+const {exec} = require('child-process-async');
 const path = require("path");
 const logger = require('./logger');
 
@@ -28,7 +28,7 @@ var updateSyncMap = exports.updateSyncMap = function (sinkId, inputId) {
 
 var start = exports.start = async function () {
     try {
-        await execAsync('pulseaudio -D');
+        await exec('pulseaudio -D');
     } catch (error) {
         logger.log("Pulse audio failed to start: " + error)
     }
@@ -46,7 +46,7 @@ var createSink = exports.createSink = async function (sinkName) {
     }
 
 
-    await execAsync('pactl load-module module-null-sink sink_name=' +
+    await exec('pactl load-module module-null-sink sink_name=' +
         sinkName + ' sink_properties=device.description=' + sinkName);
 
     sinkId = await readSinkId(sinkName);
@@ -56,18 +56,18 @@ var createSink = exports.createSink = async function (sinkName) {
 }
 
 var getNumofSinks = exports.getNumofSinks = async function () {
-    const { stdout } = await execAsync(" pactl list sinks |grep  -c 'Sink #' ");
+    const { stdout } = await exec(" pactl list sinks |grep  -c 'Sink #' ");
     return parseInt(stdout)
 }
 
 
 var getInput_IDS = exports.getInput_IDS = async function () {
-    const { stdout } = await execAsync(path.join(__dirname, './scripts/get_sink_ids.sh '));
+    const { stdout } = await exec(path.join(__dirname, './scripts/get_sink_ids.sh '));
     return stdout.trim().split('\n').map(x => +x);
 
 }
 var getSinks_Names = exports.getSinks_Names = async function () {
-    const { stdout } = await execAsync("pactl list sinks |grep 'Name' | sed 's/^.*: //'");
+    const { stdout } = await exec("pactl list sinks |grep 'Name' | sed 's/^.*: //'");
     return stdout.trim().split('\n');
 }
 
@@ -76,20 +76,20 @@ var setDefaultSink = exports.setDefaultSink = async function () {
     const defaultSink = "Default";
     const defaultSource = defaultSink + ".monitor";
     await createSink(defaultSink);
-    await execAsync('pacmd set-default-sink ' + defaultSink);
-    const { stdout } = await execAsync('pacmd set-default-source ' + defaultSource);
+    await exec('pacmd set-default-sink ' + defaultSink);
+    const { stdout } = await exec('pacmd set-default-source ' + defaultSource);
     const setDefaultOutput = stdout.trim();
     return setDefaultOutput;
 }
 
 var readSinkId = exports.readSinkId = async function (sinkName) {
-    const { stdout } = await execAsync('pactl list short sinks | grep ' + sinkName + '| cut -f1');
+    const { stdout } = await exec('pactl list short sinks | grep ' + sinkName + '| cut -f1');
     const sinkId = stdout.trim();
     return sinkId;
 }
 
 var getInputId = exports.getInputId = async function (chromePid) {
-    const { stdout } = await execAsync(path.join(__dirname, './scripts/get_input_index.sh ') + chromePid);
+    const { stdout } = await exec(path.join(__dirname, './scripts/get_input_index.sh ') + chromePid);
     const inputIdList = stdout.trim().split(" ");
     id.push(inputIdList)
 
@@ -98,7 +98,7 @@ var getInputId = exports.getInputId = async function (chromePid) {
 
 var moveInput = exports.moveInput = async function (inputId, sinkId) {
     logger.log("Moving Input id: " + inputId + " to Sink id: " + sinkId);
-    const { stdout } = await execAsync('pacmd move-sink-input ' + inputId + ' ' + sinkId);
+    const { stdout } = await exec('pacmd move-sink-input ' + inputId + ' ' + sinkId);
     const output = stdout.trim();
     return output;
 }

@@ -3,17 +3,13 @@ const Pulce = require("./pulceaudio");
 const Event = require("./Event_");
 const logger = require('./logger');
 const webcontroller = require('./web_controller');
-const drive = require('./driveApi')
+const drive = null //require('./driveApi')
 const fs = require('fs')
 
 const {
     Worker, isMainThread, parentPort, workerData
 } = require('worker_threads');
 const chrome = require("./chrome");
-var test = [
-    "file:///home/anuradhe/Desktop/%E0%B6%91%E0%B6%9A%E0%B6%B8%20%E0%B6%BB%E0%B6%A7%E0%B6%9A%E0%B7%8A%20%E0%B6%91%E0%B6%9A%E0%B6%B8%20%E0%B6%B1%E0%B7%93%E0%B6%AD%E0%B7%92%E0%B6%BA%E0%B6%9A%E0%B7%8A%20(%20480%20X%20854%20).mp4",
-    "file:///home/anuradhe/Videos/Ko%20Oya%20(%E0%B6%9A%E0%B7%9D%20%E0%B6%94%E0%B6%BA%E0%B7%8F)%20%20-%20%20%20Nuwan%20Bulathsinghala%20(%20360%20X%20640%20).mp4",
-]
 
 var workers = {};
 
@@ -95,6 +91,7 @@ class Recoder extends Event {
             var page = chrome.get_page(id);
             await this.timeout(5000);
             var a = await webcontroller.setupAudio(page);
+            //var a  = true;
             console.log("A IS ", a);
             if (a) {
                 var worker = new Worker('./engin/_worker.js');
@@ -124,7 +121,7 @@ class Recoder extends Event {
                         case "open": Recoder.jobs++; break;
                         case "error": logger.error(e[1], e[2]); break;
                         case "event": logger.log(e[1], e[2]); break;
-                        case "ok": Recoder.jobs--; this.sucsess(e[1], e[2]); break;
+                        case "ok": //Recoder.jobs--; this.sucsess(e[1], e[2]); break;
                         case "exit": workers[e[2]].terminate(); delete workers[e[2]];
                             break;
 

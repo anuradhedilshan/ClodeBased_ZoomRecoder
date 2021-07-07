@@ -1,0 +1,146 @@
+    <section class="section padding-top-70 padding-bottom-0" id="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-12 col-sm-12 align-self-center"
+                    data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+                    <img src="assets/images/left-image.png" class="rounded img-fluid d-block mx-auto" alt="App">
+                </div>
+                <div class="col-lg-1"></div>
+                <!-- Recoding Form -->
+                <div class="col-lg-6 col-md-12 col-sm-12 align-self-center mobile-top-fix">
+                    <!------------------------------------------------------------------------------  -->
+
+                    <section class="steppper">
+                        <!-- *** Step 1 *** -->
+                        <h2>Setup Your Meeting</h2>
+                        <p>Please fill in this form to create an account!</p>
+                        <hr>
+                        <div class="step clearfix">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-7"><input type="text" class="form-control name" name="fname"
+                                            placeholder="First Name" required="required"></div>
+                                    <div class="col-5"><input type="text " class="form-control name" name="lname"
+                                            placeholder="Last Name" required="required"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="email"
+                                    placeholder="Email for ZOOM not required" required="required">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="meetingid" placeholder="Meeting ID"
+                                    required="required">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="passcode" placeholder="Meeting Passcode"
+                                    required="required">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#con">
+                                    Terms & conditions
+                                </button>
+                                <button type="submit" onclick="step(1)"
+                                    class="btn btn-primary btn-lg float-right step-btn ">Setup Meeting</button>
+                            </div>
+
+                        </div>
+                        <!--*** Step 2 ***  -->
+                        <div class="step ">
+
+                            <div class="form-group">
+                                <p>Get Your license code From <font color="#cc00cc">
+                                        <address><b>+94779843032</b></address>
+                                    </font>
+                                </p>
+                                <div class="form-group " id="verify">
+                                    <label for="validationCustom01" class="form-label">Enter Your license code</label>
+                                    <input type="password" class="form-control" id="pin" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-secondary" onclick="step(0)"><i
+                                            class="fas fa-long-arrow-alt-left mr-2 "></i>Back</button>
+                                    <button type="submit" onclick="step(2)"
+                                        class="btn btn-primary step-btn btn-lg float-right">Start Recoding</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="collapse overflow-auto p-2" id="collapse">
+                            <div class="row">
+                                <h5 id="iframe_res " class="pl-2">Wait For It</h5><img id="iframe_img" alt="">
+                            </div>
+
+                            <iframe id="cframe" width="300" height="300" title="Iframe Example"></iframe>
+                        </div>
+                </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+<table class="table col-12">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Date Time</th>
+      <th scope="col">username</th>
+      <th scope="col">meetingid</th>
+      <th scope="col">state</th>
+      <th scope="col">timeout</th>
+      <th scope="col">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">4rgs72</th>
+      <td>2021 may 27 05:02:00</td>
+      <td>anuradhe</td>
+      <td>20093892</td>
+      <td><span class="bg-primary">Runnng</span></td>
+      <td>02:02:01</td>
+      <td><a href="#">Downlod</a> <a href="">View </a></td>
+    </tr>
+ 
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+      <tr>
+                                <th scope="row">4rgs72</th>
+                                <td>2021/5/1 12:09:90</td>
+                                <td>anuradhe</td>
+                                <td>20093892</td>
+                                <td><span class="bg-success text-white">Runnng</span></td>
+                                <td>02:02:01</td>
+                                <td><a class="bg-danger p-1 rounded-5 text-white ">Stop</a></td>
+                                <td><a href="#">Downlod</a> <a href="">View </a></td>
+                            </tr>

@@ -6,6 +6,7 @@ const logger = require('./engin/logger');
 const db = require('./engin/database');
 const cookie = require('cookie');
 var cookieParser = require('cookie-parser');
+const uniqid = require('uniqid');
 
 
 
@@ -19,12 +20,12 @@ app.use(cookieParser());
 
 
 
-const R = new Recoder(onfileUpload);
-var state = false;
-   (async () => {
-      await R.setup();
-      state = true;
-   })()
+// const R = new Recoder(onfileUpload);
+// var state = false;
+//    (async () => {
+//       await R.setup();
+//       state = true;
+//    })()
 
 
 
@@ -38,29 +39,31 @@ app.use(express.static(join(__dirname, './web/zoom_client')))
 var a = "Instalizing .......";
 var clients = 0;
 var jobs = 0;
+var clientURL = join(__dirname, 'web/controller/index.html');
 
+console.log("PATH", clientURL)
 logger.set_brodcast(on_massage);
 
- io.sockets.on('ack',()=>{
+io.sockets.on('ack', () => {
    console.log("acknowladge Work in Outside");
- })
+})
 
 
 io.on('connection', function (socket) {
-   console.log('***************',socket.id)
-   
-   if (socket.handshake.headers.cookie && cookie.parse(socket.handshake.headers.cookie)['id'] ) {
+   console.log('***************', socket.id)
+
+   if (socket.handshake.headers.cookie && cookie.parse(socket.handshake.headers.cookie)['id']) {
       console.log(socket.handshake.headers.cookie);
       var id = cookie.parse(socket.handshake.headers.cookie)['id'];
       clientsOBJ[id] = socket.id;
-      if(completed[id]){
-            io.sockets.to(socket.id).emit('uploadEvent',completed[id]);
+      if (completed[id]) {
+         io.sockets.to(socket.id).emit('uploadEvent', completed[id]);
       }
    }
-   
+
    socket.on("ack", (id) => {
-    logger.log("Got acknowladge from : "+id,id);
-    delete completed[id];
+      logger.log("Got acknowladge from : " + id, id);
+      delete completed[id];
    });
 
    clients++;
@@ -69,6 +72,10 @@ io.on('connection', function (socket) {
    logger.log("Client Connected =>" + clients + " <= useres  live In there");
 
    socket.on('disconnect', function () {
+      if (socket.handshake.headers.cookie && cookie.parse(socket.handshake.headers.cookie)['id']) {
+         var id = cookie.parse(socket.handshake.headers.cookie)['id'];
+         delete clientsOBJ[id];
+      }
       clients--;
       logger.log("Client Disonnected =>" + clients + " <= useres  live In there");
       io.sockets.emit('client_changed', clients);
@@ -80,15 +87,9 @@ io.on('connection', function (socket) {
 
 
 app.get('/', function (req, res) {
-   console.log("Got a GET request for the homepage ->");
-   var id = "*((^@#@#";
-   res.cookie('id', id);
-   if (req.cookies['id']) {
-
-   }
+   console.log("Got a GET request for the homepage ->", req.body);
    res.sendFile(join(__dirname, './web/controller/index.html'))
    isjobsChanged();
-
 })
 
 app.get('/client', (req, res) => {
@@ -98,23 +99,29 @@ app.get('/client', (req, res) => {
 
 
 
-app.post('/start',  (req, res) => {
+app.post('/start', (req, res) => {
    try {
-      var meetingConfig = req.body;
-      logger.log("AFTRER CALLING STARTSESSION")
-      logger.log(meetingConfig);
-(async()=>{
-      var id = await R.start_localRecode(`file:///home/anuradhe/zoom_Recoder/web/zoom_client/index.html?name=${meetingConfig.userName}&id=${meetingConfig.meetingId}&passcode=${meetingConfig.passcode}&email${meetingConfig.email}`);
-       db.addItem(meetingConfig.userName,meetingConfig.meetingId,meetingConfig.passcode,meetingConfig.email,id,`${new Date()}_ZOOM_${id}.mp4`);
-       clientsOBJ[id] = meetingConfig.socketId;
-       io.sockets.to(meetingConfig.socketId).emit('start',id);
-       isjobsChanged();
-})()
-       res.sendStatus(200);
+      if (req.cookies.uid) {
+         var mC = req.body;
+         logger.log("AFTRER CALLING STARTSESSION")
+         logger.log(mC);
+         (async () => {
+            var id = await R.start_localRecode(`${clientURL}?name=${mC.userName}&id=${mC.meetingId}&passcode=${mC.passcode}&email${mC.email}`);
+            clientsOBJ[id] = mC.socketId;
+            db.addRequest(id, req.cookies.uid, mC.userName, mC.meetingId, mC.passcode, mC.email, (err) => {
+               if (err) {
+                  logger.error("DATABASE FAIL", id)
+               }
+            })
+            io.sockets.to(mC.socketId).emit('start', id);
+            isjobsChanged();
+         })()
+         res.sendStatus(200);
+      }
 
    } catch (error) {
       logger.error("Error At Start" + error)
-      io.sockets.to(meetingConfig.socketId).emit('error',[id,error]);
+      io.sockets.to(mC.socketId).emit('error', [id, error]);
       res.sendStatus(500);
    }
 
@@ -130,6 +137,10 @@ app.post('/stop', async (req, res) => {
       clientsOBJ[id] = req.body.socketId;
       R.stop_stream(id);
       logger.log("Stoping Id" + id);
+      if (req.cookies.uid) {
+         db.setUpdate(false, id, () => {
+         })
+      }
       setTimeout(() => {
          res.cookie('id', "", { maxAge: 900000 });
          res.sendStatus(200);
@@ -143,7 +154,58 @@ app.post('/stop', async (req, res) => {
 
 
 
+app.post('/register', (req, res) => {
+   var form = req.body;
+   var id = uniqid(form.fname);
+   db.addUser(id, form.fname + form.lname, form.email, form.password, (err) => {
+      if (err) {
+         console.error("Cant REgister", err);
+         res.send(`
+         <h1 class="bg-danger">Registation fail </h1>
+         <h2 style='color:red'> ${err} </h2> <br>
+         <a href="http://www.zoder.tech" class="link-success">Redirect To Home Page</a>
+         `);
 
+      } else {
+         logger.log("Register Sucecssfully");
+         res.cookie('uid', id, { maxAge: 9000000 });
+         var requestedUrl = req.protocol + '://' + req.get('host');
+         res.redirect(requestedUrl + "?reg=ok");
+      }
+   })
+
+})
+
+app.post('/login', (req, res) => {
+   var form = req.body;
+   db.checkLogin(form.email, form.password, (err, row) => {
+      if (err) {
+         res.sendStatus(502);
+      } else {
+         if (row) {
+            logger.log("Login Sucesss")
+            res.cookie('uid', row.id, { maxAge: 9000000 });
+            res.send({ result: 1 })
+         } else {
+            res.send({ result: 502 })
+         }
+
+      }
+   })
+})
+
+app.get('/getrows', (req, res) => {
+   if (req.cookies.uid) {
+      db.getRows(req.cookies.uid, (err, rows) => {
+         if (err) {
+            console.error(err);
+            res.sendStatus(502);
+         }
+         res.send(rows)
+      })
+   }
+
+});
 
 
 
@@ -154,15 +216,23 @@ server.listen(8080, () => {
 
 
 function onfileUpload(type, file, id) {
-   completed[id] = [type,file,id];
+   refresh()
+   completed[id] = [type, file, id];
    console.log(`++++++++ File Upload +++++++ type ; ${type} file : ${file} id : ${id}`);
-   logger.log(`++++++++ File Upload +++++++ type ; ${type} file : ${file} id : ${id}`,id);
+   logger.log(`++++++++ File Upload +++++++ type ; ${type} file : ${file} id : ${id}`, id);
    try {
-         io.sockets.to(clientsOBJ[id]).emit('uploadEvent', [type,file,id]);
+      io.sockets.to(clientsOBJ[id]).emit('uploadEvent', [type, file, id]);
+      db.setUpdate(false, id, () => {
+      })
+      if (type == "ok") {
+         db.setLinks(id, file.webContentLink, file.webViewLink, (err) => {
+            logger.error("SETLINKS DB errro", id)
+         })
+      }
    } catch (error) {
-          setTimeout(()=>{
-            delete clientsOBJ[id];
-         },2000)
+      setTimeout(() => {
+         delete clientsOBJ[id];
+      }, 2000)
       console.error("CAoont send Brodcast masaage io ", error);
    }
 }

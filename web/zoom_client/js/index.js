@@ -27,8 +27,8 @@ try {
 
 
 const meetConfig = {
-	apiKey: 'CCwpxEroQ0KfAq6DH_LY9Q',
-	apiSecret: 'RsQhCg27wjjKViPJYVf4otERJVFgU0LZxLst',
+	apiKey: 'i-Ig5xMAQLyWdVU6dVzblw',
+	apiSecret: '5YI78ErX4nU7WtzKRy8KvCyvBYmAu9ifAVHL',
 	meetingNumber: meetID,
 	leaveUrl: location.search,
 	userName: named,
