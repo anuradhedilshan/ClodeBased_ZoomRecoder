@@ -20,12 +20,12 @@ app.use(cookieParser());
 
 
 
-// const R = new Recoder(onfileUpload);
-// var state = false;
-//    (async () => {
-//       await R.setup();
-//       state = true;
-//    })()
+const R = new Recoder(onfileUpload);
+var state = false;
+   (async () => {
+      await R.setup();
+      state = true;
+   })()
 
 
 
@@ -170,7 +170,7 @@ app.post('/register', (req, res) => {
          logger.log("Register Sucecssfully");
          res.cookie('uid', id, { maxAge: 9000000 });
          var requestedUrl = req.protocol + '://' + req.get('host');
-         res.redirect(requestedUrl + "?reg=ok");
+         res.redirect('http://www.zoder.tech' + "?reg=ok");
       }
    })
 
