@@ -1,141 +1,116 @@
-# ClodeBased_ZoomRecoder
+# Cloud_based_zoomrecoder
 
-#######################################shell commads pulce audio########################################
-                                                                    
-#create vitual Output
- pacmd load-module module-null-sink sink_name=MySink
- pacmd update-sink-proplist MySink device.description=MySink
+[![demo 1](named "demo 1")](./demo/1639627107336.jpg "demo 1")
+[![demo ](dmo 2 "demo ")](./demo/1639627125135.jpg "demo ")
+[![demo 3](demo 3 "demo 3")](./demo/1639627110425.jpg "demo 3")
+[![demo 4](demo 4 "demo 4")](./demo/1639627140177.jpg "demo 4")
+
+####pulce audio shell commads 
+```bash
+#create vitual Output 
+pacmd load-module module-null-sink sink_name=MySink pacmd update-sink-proplist MySink device.description=MySink
 
 #set Loopback 
- pacmd load-module module-loopback sink=MySink
+pacmd load-module module-loopback sink=MySink
 
-#Change to  null source
- pacmd load-module module-null-source sink=My_Fake
+#Change to null source 
+pacmd load-module module-null-source sink=My_Fake
 
-#remove module
- pactl unload-module   [name|clienid |``]
+remove module 
+#pactl unload-module [name|clienid |``]
 
-#find Idts
+#find Ids 
 pactl unload-module
 
+#List All sink _ outputsDevices 
+pactl list short sinks
 
-#List All sink _ outputsDevices
- pactl list short sinks
+#list Inputs 
+pacmd list-sink-inputs
 
-#list Inputs
- pacmd list-sink-inputs 
+#get Sink Name Only sinks 
+pactl list |grep 'Name' | sed 's/^.*: //'
 
-#get Sink Name Only
- sinks pactl list  |grep 'Name' | sed 's/^.*: //'
+#Get Number Of Sink 
+pactl list sinks |grep -c 'Sink #'
 
-#Get Number Of Sink
- pactl list sinks |grep  -c 'Sink #' 
-
-#Get Id Of sinks
- pactl list short  sinks | sed 's/[ \t]*\([0-9]\{1,\}\).*/\1/'
-
-
- 
----------------------------------------------------------------------------------------------
-
-***zoom***
-
-waitingRoom
-wr-cwr-contentontent
-
-
-*******
-/home/zoomRecoding/ ->  mkdir
-
-
-
+#Get Id Of sinks 
+pactl list short sinks | sed 's/[ \t]([0-9]{1,})./\1/'
+```
 
 ---------------------------------------------------------------------------------------------
- setup() {
-        //page.target()._targetId
-        this.EndPoint = await this.chrome.launchChrome();
-        try {
-            const forLoop = async _ => {
 
 
-                for (let index = 0; index < this.max; index++) {
-                    logger.log("SETUPING", index);
-                    var id = await this.chrome.new_page(test[index]);
-                    await this.timeout(5000);
-                    var inputs = await this.pulce.getInputId(Chrome.processId);
-                    var inId = this.find_Large(inputs);
-                    var page = Chrome.get_page(id);
-                    this.pages[index] = id;
-                    page.TargetID = page.target()._targetId;
-                    page.AInId = inId;
-                    var sinkId = await this.pulce.createSink("Sink_Name-" + index);
-                    logger.log(id, sinkId);
-                    this.sinks[index] = sinkId;
-                    page.SinkID = "Sink_Name-" + index;
-                    logger.log(page.SinkID);
-                    await this.pulce.moveInput(inId, sinkId);
-                }
-                return Promise.resolve("SDS");
-            }
-            return forLoop();
-        }
-        catch (e) {
-            this.installingError(e)
-        }
-    }
--------------------------------------------------------------------------------------------------
+##### FFmpeg Params
+-  f: force format 
+-  r: frame rate  i: input files assuming your files are filename001.jpg, filename002.jpg, ... 
+-  vcodec: video codec 
+-  crf: constant rate factor (0-51). 17-18 is (nearly) visually lossless. See Encode/H.264 //   pix_fmt: pixel format
+
+##### VLC Capture stream
+vlc tcp://@127.0.0.1:1234
+##### DEFUALT FPS
+> Screen Cast Fps for Media = 20
+SCreenCast Fps for Web =12
+SCreenShotFPS for media = 14
 
 
--------------------------------------------------------------------------------------------------|
- 
- /* client.send("Page.startScreencast", { format: 'jpeg', everyNthFrame: 1, });                  
-  ffmpeg = await FFmpegLauncher.start(params, local);
-  client.on("Page.screencastFrame", (d) => {
+------------
+#####SEND to PIPELINE stdin
+```javascript
+client.send("Page.startScreencast", { format: 'jpeg', everyNthFrame: 1, });
+ffmpeg = await FFmpegLauncher.start(params, local); client.on("Page.screencastFrame", (d) => {
 
-    if (ffmpeg && ffmpeg.stdin) {
+if (ffmpeg && ffmpeg.stdin) {
 
-      try {
-        let buff = Buffer.from(d.data, 'base64');
-        ffmpeg.stdin.write(buff);
-       
-      } catch (error) {
-        console.log("ERRORR  @ ", error);
-      }
-
-
-    }
- client.send("Page.screencastFrameAck", { sessionId: d.sessionId });
-
-
+  try {
+    let buff = Buffer.from(d.data, 'base64');
+    ffmpeg.stdin.write(buff);
+   
+  } catch (error) {
+    console.log("ERRORR  @ ", error);
   }
-  );*/
-
-----------------------------------------------------------------------------------------------------
-
-______________________________________________________________________________________________________
-page
-.screenshot
-([options])
-l);    
-______________________________________________________________________________________________-
 
 
-######################################## FFMPEG Params ###############################################
-    // f: force format
-    // r: frame rate
-    // i: input files assuming your files are filename001.jpg, filename002.jpg, ...
-    // vcodec: video codec
-    // crf: constant rate factor (0-51). 17-18 is (nearly) visually lossless. See Encode/H.264
-    // pix_fmt: pixel format
+}
+client.send("Page.screencastFrameAck", { sessionId: d.sessionId });
 
+} );
 
-    
- vlc tcp://@127.0.0.1:1234
+```
+
+------------
 
 
 
+##### Func
+```javascript
+async function setup() { 
+page.target()._targetId this.EndPoint = await this.chrome.launchChrome(); try { const forLoop = async _ => {
+            for (let index = 0; index < this.max; index++) {
+                logger.log("SETUPING", index);
+                var id = await this.chrome.new_page(test[index]);
+                await this.timeout(5000);
+                var inputs = await this.pulce.getInputId(Chrome.processId);
+                var inId = this.find_Large(inputs);
+                var page = Chrome.get_page(id);
+                this.pages[index] = id;
+                page.TargetID = page.target()._targetId;
+                page.AInId = inId;
+                var sinkId = await this.pulce.createSink("Sink_Name-" + index);
+                logger.log(id, sinkId);
+                this.sinks[index] = sinkId;
+                page.SinkID = "Sink_Name-" + index;
+                logger.log(page.SinkID);
+                await this.pulce.moveInput(inId, sinkId);
+            }
+            return Promise.resolve("SDS");
+        }
+        return forLoop();
+    }
+    catch (e) {
+        this.installingError(e)
+    }
+}
+```
 
-Screen Cast Fps for Media = 20FPS
-SCreenCast Fps for Web = 
-
-SCreenShotFPS for medi  = 14 
