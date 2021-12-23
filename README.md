@@ -7,7 +7,7 @@
 
    <img src="./demo/1639627110425.jpg" width="100%" >
 
-####pulce audio shell commads 
+##### pulce audio shell commads 
 ```bash
 #create vitual Output 
 pacmd load-module module-null-sink sink_name=MySink pacmd update-sink-proplist MySink device.description=MySink
