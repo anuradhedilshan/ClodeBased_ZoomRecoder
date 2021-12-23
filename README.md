@@ -1,9 +1,9 @@
-# Cloud_based_zoomrecoder
+# Cloud_based_zoomrecoder :editormd-logo-2x:
 
-![demo 1](./demo/1639627107336.jpg ){:class="img-responsive"}
-![demo ](./demo/1639627125135.jpg ){:class="img-responsive"}
-![demo 3](./demo/1639627110425.jpg){:class="img-responsive"}
-![demo 4](./demo/1639627140177.jpg ){:class="img-responsive"}
+![demo 1](./demo/1639627107336.jpg?v=4&s=200 )
+![demo ](./demo/1639627125135.jpg?v=4&s=200 )
+![demo 3](./demo/1639627110425.jpg?v=4&s=200)
+![demo 4](./demo/1639627140177.jpg?v=4&s=200 )
 
 ####pulce audio shell commads 
 ```bash
