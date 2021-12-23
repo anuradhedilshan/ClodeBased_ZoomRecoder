@@ -1,9 +1,9 @@
 # Cloud_based_zoomrecoder
 
-![demo 1](./demo/1639627107336.jpg | width=200)
-![demo ](./demo/1639627125135.jpg | width=200 )
-![demo 3](./demo/1639627110425.jpg | width=100)
-![demo 4](./demo/1639627140177.jpg | width=100)
+![demo 1](./demo/1639627107336.jpg ){:class="img-responsive"}
+![demo ](./demo/1639627125135.jpg ){:class="img-responsive"}
+![demo 3](./demo/1639627110425.jpg){:class="img-responsive"}
+![demo 4](./demo/1639627140177.jpg ){:class="img-responsive"}
 
 ####pulce audio shell commads 
 ```bash
