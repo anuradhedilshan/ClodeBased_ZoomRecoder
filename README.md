@@ -1,9 +1,9 @@
 # Cloud_based_zoomrecoder
 
-[![demo 1](named "demo 1")](./demo/1639627107336.jpg "demo 1")
-[![demo ](dmo 2 "demo ")](./demo/1639627125135.jpg "demo ")
-[![demo 3](demo 3 "demo 3")](./demo/1639627110425.jpg "demo 3")
-[![demo 4](demo 4 "demo 4")](./demo/1639627140177.jpg "demo 4")
+![demo 1](./demo/1639627107336.jpg)
+![demo ](./demo/1639627125135.jpg )
+![demo 3](./demo/1639627110425.jpg )
+![demo 4](./demo/1639627140177.jpg )")
 
 ####pulce audio shell commads 
 ```bash
@@ -43,7 +43,8 @@ pactl list short sinks | sed 's/[ \t]([0-9]{1,})./\1/'
 
 ##### FFmpeg Params
 -  f: force format 
--  r: frame rate  i: input files assuming your files are filename001.jpg, filename002.jpg, ... 
+-  r: frame rate  
+-  i: input files assuming your files are filename001.jpg, filename002.jpg, ... 
 -  vcodec: video codec 
 -  crf: constant rate factor (0-51). 17-18 is (nearly) visually lossless. See Encode/H.264 //   pix_fmt: pixel format
 
