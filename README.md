@@ -1,6 +1,6 @@
 # Cloud_based_zoomrecoder  :joy_cat:
 <p align="center">
-  <img src="./demo/1639627107336.jpg" width="306" >
+  <img src="./demo/map.png">
   <img src="./demo/1639627125135.jpg" width="300" >
  <img src="./demo/1639627140177.jpg" width="300" >
 </p>
